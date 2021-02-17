@@ -1,0 +1,75 @@
+1. Write a MongoDB query to display all the documents in the collection restaurants.
+1. Напишіть запит MongoDB, щоб відобразити всі документи в колекційних ресторанах.
+db.getCollection('restaurants').find({});
+
+2. Write a MongoDB query to display the fields restaurant_id, name, borough and cuisine for all the documents in the collection restaurant.
+2. Напишіть запит MongoDB для відображення полів restaurant_id, імені, району та кухні для всіх документів у ресторані колекції.
+db.getCollection('restaurants')
+.find({})
+.sort({ "restaurant_id": 1, "name":1,"borough": 1,"cuisine":1
+    });
+
+3. Write a MongoDB query to display the fields restaurant_id, name, borough and cuisine, but exclude the field _id for all the documents in the collection restaurant.
+3. Напишіть запит MongoDB, щоб відобразити поля restaurant_id, ім'я, район та кухню, але виключити поле _id для всіх документів у ресторані колекції.
+db.getCollection('restaurants')
+.find({},{
+    _id:0,
+    "restaurant_id": 1, 
+    "name":1,
+    "borough": 1,
+    "cuisine":1 
+    });
+
+
+4. Write a MongoDB query to display the fields restaurant_id, name, borough and zip code, but exclude the field _id for all the documents in the collection restaurant.
+4. Напишіть запит MongoDB для відображення полів restaurant_id, імені, району та поштового індексу, але виключіть поле _id для всіх документів у ресторані збору.
+db.getCollection('restaurants')
+.find({},{
+    _id:0,
+    "restaurant_id": 1, 
+    "name":1,
+    "borough": 1,
+    "address":
+              {"zipcode": 1} 
+    });
+
+5. Write a MongoDB query to display all the restaurant which is in the borough Bronx.
+5. Напишіть запит MongoDB, щоб відобразити весь ресторан, що знаходиться в районі Бронкс.
+db.getCollection('restaurants')
+.find({
+    "borough" : "Bronx"
+    });
+
+6. Write a MongoDB query to display the first 5 restaurant which is in the borough Bronx.
+6. Напишіть запит MongoDB, щоб відобразити перший 5 ресторанів, що знаходяться в районі Бронкс.
+db.getCollection('restaurants')
+.find({
+    "borough" : "Bronx",
+    })   .limit(5);
+
+7.Write a MongoDB query to display the next 5 restaurants after skipping first 5 which are in the borough Bronx.
+7. Напишіть запит MongoDB, щоб відобразити наступні 5 ресторанів після пропуску перших 5, які знаходяться в районі Бронкс.
+db.getCollection('restaurants')
+.find({
+    "borough" : "Bronx",
+    
+    }) .skip(5)  .limit(5);
+
+8. Write a MongoDB query to find the restaurants who achieved a score more than 90.
+8. Напишіть запит MongoDB, щоб знайти ресторани, які набрали більше 90 балів.
+db.getCollection('restaurants')
+.find({
+"grades.score": {
+    $gt:90
+    }
+    });
+
+10. Write a MongoDB query to find the restaurants which locate in latitude value less than -95.754168
+10. Напишіть запит MongoDB, щоб знайти ресторани, які знаходяться за значенням широти менше -95,754168
+db.getCollection('restaurants')
+.find(
+{"address":
+    {"coord":
+        {$lt:-95.754168}
+        }
+        );
