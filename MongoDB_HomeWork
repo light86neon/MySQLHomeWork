@@ -80,9 +80,9 @@ db.getCollection("students").aggregate ([
         }]);
 
 12) Знайти дітей з не повною сімєю
-db.getCollection('students').find({
-  parents: {$size: 1}
-});
+db.getCollection("students").find({
+parents: {$not:{$size:2}}
+    });
 
 13) Знайти батьків які не працюють
 db.getCollection("students").find({
@@ -90,14 +90,14 @@ db.getCollection("students").find({
     });
 
 14) Не працюючих батьків влаштувати офіціантами
-db.getCollection('students').update(
-  {$and:[
-    {parents:{$ne:null}},
-    {"parents.profession":null}  
-      ]}, 
-  {$set: { "parents.$.profession":"waiter"}}, 
-  {multi:true} 
-);
+db.getCollection('students').updateMany(
+ {  $and:[
+           { parents: {$ne: null} },
+           { 'parents.profession': null }]
+ },
+ {  $set:{ 'parents.$[elem].profession': 'Waitress' }},
+ { "arrayFilters": [{ "elem.profession": null}] }
+ );
 
 15) Вигнати дітей, які мають середній бал менше ніж 2.5
 db.getCollection('students').remove({
